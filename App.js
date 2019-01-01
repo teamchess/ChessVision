@@ -1,83 +1,91 @@
 import React from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
-import { Permissions, ImagePicker } from "expo";
+import { Permissions, ImagePicker, FileSystem } from "expo";
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      image: null
+      image: null,
+      certainty: null
     };
 
     // Properly requests permission to access the Camera Roll
   }
 
   pickImage = async () => {
-    const { status: cameraRollPerm } = await Permissions.askAsync(
-      Permissions.CAMERA_ROLL
-    );
+    const { status: cameraRollPerm } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
     // only if user allows permission to camera roll
     if (cameraRollPerm === "granted") {
       let pickerResult = await ImagePicker.launchImageLibraryAsync({
+        base64: true,
         allowsEditing: true,
         aspect: [1, 1]
       });
 
       this.setState({
         image: pickerResult.base64
+      }, () => {
+        this.sendImage()
       });
-
-      this.sendImage(pickerResult);
     }
   };
 
   takePhoto = async () => {
-    const { status: cameraPerm } = await Permissions.askAsync(
-      Permissions.CAMERA
-    );
+    const { status: cameraPerm } = await Permissions.askAsync(Permissions.CAMERA);
 
-    const { status: cameraRollPerm } = await Permissions.askAsync(
-      Permissions.CAMERA_ROLL
-    );
+    const { status: cameraRollPerm } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
     // only if user allows permission to camera AND camera roll
     if (cameraPerm === "granted" && cameraRollPerm === "granted") {
       let pickerResult = await ImagePicker.launchCameraAsync({
+        base64: true,
         allowsEditing: true,
         aspect: [1, 1]
       });
 
       this.setState({
-        image: pickerResult.base64      
+        image: pickerResult.base64
+      }, () => {
+        this.sendImage()
       });
-
-      this.sendImage(pickerResult);
     }
   };
 
-  sendImage = pickerResult => {
+  sendImage() {
     // change to 162.243.160.170 in production
-    fetch("https://174.44.204.55:3000/", {
+    fetch("http://locahost:3000/", {
       method: "POST",
-      body: pickerResult
+      headers: {
+        'Content-Type': "application/json"
+      },
+      body: JSON.stringify({
+        image: this.state.image
+      })
     })
-      .then(response => response.json())
-      .catch(error => console.log("Error:", error))
-      .then(response => console.log("Success:", JSON.stringify(response)));
+    .then(resp => resp.json())
+    .then(body => this.setState({ fen: body.fen, certainty: body.certainty}))
+    .catch(x => console.log(x))
   };
 
+  displayFenAndCertainty() {
+    return (
+      <>
+        <Text>certainty: {this.state.certainty}</Text>
+        <Text>fen: {this.state.fen}</Text>
+      </>
+    );
+  }
+
   render() {
-    let { image } = this.state;
-    console.log(image);
     return (
       <View style={styles.container}>
         <Button title="Upload image" onPress={this.pickImage} />
-        {image && (
-          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-        )}
+        {this.state.image && <Image source={{ uri: `data:image/jpg;base64,${this.state.image}` }} style={{ width: 200, height: 200 }} />}
         <Button title="Take Photo" onPress={this.takePhoto} />
+        {this.displayFenAndCertainty()}
       </View>
     );
   }
