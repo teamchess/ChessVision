@@ -8,10 +8,12 @@ export default class App extends React.Component {
 
     this.state = {
       image: null,
-      certainty: null
+      certainty: null,
+      fen: null
     };
 
     // Properly requests permission to access the Camera Roll
+    this.sendImage = this.sendImage.bind(this);
   }
 
   pickImage = async () => {
@@ -56,9 +58,10 @@ export default class App extends React.Component {
 
   sendImage() {
     // change to 162.243.160.170 in production
-    fetch("http://locahost:3000/", {
+    fetch("http://192.168.1.14:3000", {
       method: "POST",
       headers: {
+        Accept: "application/json",
         'Content-Type': "application/json"
       },
       body: JSON.stringify({
