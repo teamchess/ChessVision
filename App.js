@@ -1,6 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, View, Button, Image } from "react-native";
-import { Permissions, ImagePicker, FileSystem } from "expo";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Clipboard,
+  ActivityIndicator
+} from "react-native";
+import { Permissions, ImagePicker } from "expo";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -9,7 +16,8 @@ export default class App extends React.Component {
     this.state = {
       image: null,
       certainty: null,
-      fen: null
+      fen: 'himynameisronlaniado',
+      buttonPressed: false,
     };
 
     // Properly requests permission to access the Camera Roll
@@ -17,7 +25,9 @@ export default class App extends React.Component {
   }
 
   pickImage = async () => {
-    const { status: cameraRollPerm } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    const { status: cameraRollPerm } = await Permissions.askAsync(
+      Permissions.CAMERA_ROLL
+    );
 
     // only if user allows permission to camera roll
     if (cameraRollPerm === "granted") {
@@ -27,18 +37,26 @@ export default class App extends React.Component {
         aspect: [1, 1]
       });
 
-      this.setState({
-        image: pickerResult.base64
-      }, () => {
-        this.sendImage()
-      });
+      this.setState(
+        {
+          image: pickerResult.base64,
+          buttonPressed: true,
+        },
+        () => {
+          this.sendImage();
+        }
+      );
     }
   };
 
   takePhoto = async () => {
-    const { status: cameraPerm } = await Permissions.askAsync(Permissions.CAMERA);
+    const { status: cameraPerm } = await Permissions.askAsync(
+      Permissions.CAMERA
+    );
 
-    const { status: cameraRollPerm } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    const { status: cameraRollPerm } = await Permissions.askAsync(
+      Permissions.CAMERA_ROLL
+    );
 
     // only if user allows permission to camera AND camera roll
     if (cameraPerm === "granted" && cameraRollPerm === "granted") {
@@ -48,11 +66,15 @@ export default class App extends React.Component {
         aspect: [1, 1]
       });
 
-      this.setState({
-        image: pickerResult.base64
-      }, () => {
-        this.sendImage()
-      });
+      this.setState(
+        {
+          image: pickerResult.base64,
+          buttonPressed: true
+        },
+        () => {
+          this.sendImage();
+        }
+      );
     }
   };
 
@@ -62,16 +84,16 @@ export default class App extends React.Component {
       method: "POST",
       headers: {
         Accept: "application/json",
-        'Content-Type': "application/json"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         image: this.state.image
       })
     })
-    .then(resp => resp.json())
-    .then(body => this.setState({ fen: body.fen, certainty: body.certainty}))
-    .catch(x => console.log(x))
-  };
+      .then(resp => resp.json())
+      .then(body => this.setState({ fen: body.fen, certainty: body.certainty }))
+      .catch(x => console.log(x));
+  }
 
   displayFenAndCertainty() {
     return (
@@ -81,14 +103,49 @@ export default class App extends React.Component {
       </>
     );
   }
+  copyToClipboard() {
+    Clipboard.getString(this.state.fen);
+    alert("Copied FEN to clipboard. Now you can paste this into any Chess engine and it will show you the board!");
+    console.log("FEN copied to clipboard");
+  };
+  loadingIndicator() {
+    return (
+      <>
+    <ActivityIndicator size="large" color="black" style={{marginTop: '20%'}}/>
+    </>
+    );
+  }
 
   render() {
     return (
       <View style={styles.container}>
-        <Button title="Upload image" onPress={this.pickImage} />
-        {this.state.image && <Image source={{ uri: `data:image/jpg;base64,${this.state.image}` }} style={{ width: 200, height: 200 }} />}
-        <Button title="Take Photo" onPress={this.takePhoto} />
-        {this.displayFenAndCertainty()}
+        <View style={styles.fen}>
+          <Text
+            style={{
+              fontSize: 18,
+              color: "black",
+              marginLeft: "17%",
+              width: "100%"
+            }}
+          >
+            FEN: (click to copy to clipboard)
+          </Text>
+          <TouchableOpacity
+            onPress={this.copyToClipboard}
+            style={styles.clipboard}
+          >
+            {!this.state.buttonPressed
+              ? <Text>{this.state.fen}</Text>
+              : this.loadingIndicator()}
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.certainty}>certainty: {this.state.certainty}</Text>
+        <TouchableOpacity onPress={this.pickImage} style={styles.touchable}>
+          <Text style={styles.buttonText}>Upload Image</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.takePhoto} style={styles.touchable}>
+          <Text style={styles.buttonText}>Take Photo</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -100,5 +157,33 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
+  },
+  touchable: {
+    backgroundColor: "#0088cc",
+    width: "75%",
+    height: 50,
+    borderRadius: 15,
+    padding: 10,
+    marginBottom: 25
+  },
+  buttonText: {
+    color: "white",
+    textAlign: "center"
+  },
+  fen: {
+    width: "75%",
+    height: "25%",
+    textAlign: "center",
+    borderRadius: 30,
+    borderWidth: 2,
+  },
+  clipboard: {
+    width: "90%",
+    height: "80%",
+    borderRadius: 30,
+    marginLeft: "5%",
+    backgroundColor: "grey",
+    color: "#f0f5f5",
+    textAlignVertical: 'center'
   }
 });
