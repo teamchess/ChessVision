@@ -16,7 +16,7 @@ export default class App extends React.Component {
     this.state = {
       image: null,
       certainty: null,
-      fen: 'himynameisronlaniado',
+      fen: '2bqk1nr/pppppppp/r1nb4/8/2PR1NR1/4PB2/PP1P1PPP/1NB1K3 w KQkq -',
       buttonPressed: false,
     };
 
@@ -137,7 +137,7 @@ export default class App extends React.Component {
             style={styles.clipboard}
           >
             {!this.state.buttonPressed
-              ? <Text>{this.state.fen}</Text>
+              ? <Text style={styles.fenString}>{this.state.fen}</Text>
               : this.loadingIndicator()}
           </TouchableOpacity>
         </View>
@@ -187,5 +187,12 @@ const styles = StyleSheet.create({
     backgroundColor: "grey",
     color: "#f0f5f5",
     textAlignVertical: 'center'
+  },
+  fenString: {
+    width: '60%',
+    color: 'white',
+    fontSize: 24,
+    textAlign: 'center',
+    marginLeft: '20%'
   }
 });
