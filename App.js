@@ -105,7 +105,7 @@ export default class App extends React.Component {
   }
 
   copyToClipboard() {
-    Clipboard.getString(this.state.fen);
+    Clipboard.setString(this.state.fen);
     alert("Copied FEN to clipboard. Now you can paste this into any Chess engine and it will show you the board!");
     console.log("FEN copied to clipboard");
   };
