@@ -8,11 +8,14 @@ import {
 	ActivityIndicator,
 } from "react-native";
 import { Permissions, ImagePicker } from "expo";
+
 import Board from "./components/Board";
 import Button from "./components/Button";
+
 export default class App extends React.Component {
 	constructor(props) {
 		super(props);
+
 		this.state = {
 			image: null,
 			certainty: null,

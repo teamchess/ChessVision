@@ -1,41 +1,75 @@
 import React from "react";
 import { View, StyleSheet, Image } from "react-native";
 
-export default class Piece extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {};
-	}
-	render() {
-		return (
-			<View>
-				<Image source={PIECES.w.P} style={styles.pieces} />
-			</View>
-		);
-	}
-}
 const PIECES = {
-	b: {
-		B: require("../pieces/bB.png"),
-		K: require("../pieces/bK.png"),
-		N: require("../pieces/bN.png"),
-		P: require("../pieces/bP.png"),
-		Q: require("../pieces/bQ.png"),
-		R: require("../pieces/bR.png"),
-	},
-	w: {
-		B: require("../pieces/wB.png"),
-		K: require("../pieces/wK.png"),
-		N: require("../pieces/wN.png"),
-		P: require("../pieces/wP.png"),
-		Q: require("../pieces/wQ.png"),
-		R: require("../pieces/wR.png"),
-	},
+  b: {
+    B: require("../assets/pieces/bB.png"),
+    K: require("../assets/pieces/bK.png"),
+    N: require("../assets/pieces/bN.png"),
+    P: require("../assets/pieces/bP.png"),
+    Q: require("../assets/pieces/bQ.png"),
+    R: require("../assets/pieces/bR.png")
+  },
+  w: {
+    B: require("../assets/pieces/wB.png"),
+    K: require("../assets/pieces/wK.png"),
+    N: require("../assets/pieces/wN.png"),
+    P: require("../assets/pieces/wP.png"),
+    Q: require("../assets/pieces/wQ.png"),
+    R: require("../assets/pieces/wR.png")
+  }
 };
 
+export default class Piece extends React.Component {
+  constructor(props) {
+		super(props);
+		
+    this.state = {};
+	}
+	
+	getPieceImage(num) {
+		const color = num > 10 ? "b" : "w";
+		const colorPieces = PIECES[color];
+		let letter = null;
+
+		const n = num > 10 ? num - 10 : num
+		// Subtract 10 if the number is black
+		switch (n) {
+			case 0:
+				return;
+			case 1:
+				letter = "R";
+				break;
+			case 2:
+				letter = "N";
+				break;
+			case 3:
+				letter = "B";
+				break;
+			case 4:
+				letter = "Q";
+				break;
+			case 5:
+				letter = "K";
+				break;
+			case 6:
+				letter = "P";
+				break;
+			default:
+				throw `ERROR: Unrecognizable Piece (${n})`
+		}
+
+		return colorPieces[letter];
+	}
+
+  render() {
+    return <Image source={this.getPieceImage(this.props.number)} style={styles.pieces} />;
+	}
+}
+
 const styles = StyleSheet.create({
-	pieces: {
-		width: 50,
-		height: 50,
-	},
+  pieces: {
+    width: 30,
+    height: 30
+  }
 });
