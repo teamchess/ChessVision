@@ -7,6 +7,8 @@ export default class Row extends React.Component {
 		super(props);
 		this.state = {
 			squares: [],
+			letters: ["a", "b", "c", "d", "e", "f", "g", "h"],
+			currentRow: 1,
 		};
 	}
 	componentWillMount() {
@@ -14,11 +16,24 @@ export default class Row extends React.Component {
 	}
 
 	renderRow() {
+		this.setState({ currentRow: this.state.currentRow + 1 });
 		for (let i = 0; i < 8; i++) {
 			if (i % 2) {
-				this.state.squares.push(<Square color={styles.lightCell} />);
+				this.state.squares.push(
+					<Square
+						color={styles.lightCell}
+						coord={
+							this.state.currentRow + this.state.letters[i] + ""
+						}
+					/>
+				);
 			} else {
-				this.state.squares.push(<Square color={styles.darkCell} />);
+				this.state.squares.push(
+					<Square
+						color={styles.darkCell}
+						coord={this.state.currentRow + this.state.letters[i]}
+					/>
+				);
 			}
 			console.log(this.state.squares);
 		}

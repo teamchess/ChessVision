@@ -9,14 +9,14 @@ import {
 } from "react-native";
 import { Permissions, ImagePicker } from "expo";
 import Board from "./components/Board";
+import Button from "./components/Button";
 export default class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			image: null,
 			certainty: null,
-			fen:
-				"2bqk1nr/pppppppp/r1nb4/8/2PR1NR1/4PB2/PP1P1PPP/1NB1K3 w KQkq -",
+			fen: "",
 			buttonPressed: false,
 		};
 
@@ -151,18 +151,8 @@ export default class App extends React.Component {
           </TouchableOpacity>
         </View>
         <Text style={styles.certainty}>certainty: {this.state.certainty}</Text> */}
-				<TouchableOpacity
-					onPress={this.pickImage}
-					style={styles.touchable}
-				>
-					<Text style={styles.buttonText}>Upload Image</Text>
-				</TouchableOpacity>
-				<TouchableOpacity
-					onPress={this.takePhoto}
-					style={styles.touchable}
-				>
-					<Text style={styles.buttonText}>Take Photo</Text>
-				</TouchableOpacity>
+        <Button onPress={this.pickImage} title="Upload Image" />
+        <Button onPress={this.takePhoto} title="Take Photo" />
 			</View>
 		);
 	}
@@ -175,19 +165,6 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		alignContent: "center",
 		justifyContent: "center",
-	},
-	touchable: {
-		backgroundColor: "#0088cc",
-		width: "75%",
-		height: 50,
-		borderRadius: 15,
-		padding: 10,
-		marginTop: 25,
-		alignContent: "flex-end",
-	},
-	buttonText: {
-		color: "white",
-		textAlign: "center",
 	},
 	fen: {
 		width: "75%",

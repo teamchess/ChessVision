@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import Pieces from "./Piece";
+import Piece from "./Piece";
 
 export default class Square extends React.Component {
 	constructor(props) {
@@ -9,8 +9,8 @@ export default class Square extends React.Component {
 	}
 	render() {
 		return (
-			<View style={this.props.color}>
-				<Pieces />
+			<View style={this.props.color} key={this.props.coord}>
+				<Text>{this.props.coord}</Text>
 			</View>
 		);
 	}
