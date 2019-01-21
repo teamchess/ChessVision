@@ -20,13 +20,7 @@ const PIECES = {
   }
 };
 
-export default class Piece extends React.Component {
-  constructor(props) {
-		super(props);
-		
-    this.state = {};
-	}
-	
+export default class Piece extends React.Component {	
 	getPieceImage(num) {
 		const color = num > 10 ? "b" : "w";
 		const colorPieces = PIECES[color];
@@ -70,6 +64,7 @@ export default class Piece extends React.Component {
 const styles = StyleSheet.create({
   pieces: {
 		width: Dimensions.get("window").width / 10,
-		height: Dimensions.get("window").width / 9
+		height: Dimensions.get("window").width / 9,
+		alignSelf: "center",
   }
 });
