@@ -32,7 +32,7 @@ export default class Square extends React.Component {
 
 const styles = StyleSheet.create({
 	square: {
-		height: 1,
+		flex: 1,
 		backgroundColor: "#F8F8F8"
 	},
 	lightSquare: {},

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Dimensions, StyleSheet } from "react-native";
 import Square from "./Square";
 
 export default class Board extends React.Component {
@@ -38,12 +38,11 @@ export default class Board extends React.Component {
 
 const styles = StyleSheet.create({
   board: {
-		display: "flex",
-		flexDirection: "row",
-		width: 200,
-		height: 200
+		width: Dimensions.get("window").width,
+		height: Dimensions.get("window").width,
 	},
 	row: {
-		width: 1
+		flex: 1,
+		flexDirection: "row" 
 	}
 });

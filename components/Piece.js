@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { Dimensions, StyleSheet, Image } from "react-native";
 
 const PIECES = {
   b: {
@@ -69,7 +69,7 @@ export default class Piece extends React.Component {
 
 const styles = StyleSheet.create({
   pieces: {
-    width: 30,
-    height: 30
+		width: Dimensions.get("window").width / 10,
+		height: Dimensions.get("window").width / 9
   }
 });
