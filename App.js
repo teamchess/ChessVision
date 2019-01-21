@@ -154,8 +154,8 @@ export default class App extends React.Component {
           </TouchableOpacity>
         </View>
         <Text style={styles.certainty}>certainty: {this.state.certainty}</Text> */}
-        <Button onPress={this.pickImage} title="Upload Image" />
-        <Button onPress={this.takePhoto} title="Take Photo" />
+        <Button title="Upload Image" />
+        <Button title="Take Photo" />
 			</View>
 		);
 	}
