@@ -163,7 +163,7 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
 	container: {
-		marginTop: 200,
+		marginTop: 100,
 		backgroundColor: "#fff",
 		alignItems: "center",
 		alignContent: "center",
