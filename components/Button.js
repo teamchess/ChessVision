@@ -8,7 +8,7 @@ export default class Button extends React.Component {
 	}
 	render() {
 		return (
-			<TouchableOpacity style={styles.button}>
+			<TouchableOpacity style={styles.button} onPress={this.props.onPress}>
 				<Text style={styles.buttonText}>{this.props.title}</Text>
 			</TouchableOpacity>
 		);
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 		borderRadius: 15,
 		padding: 10,
 		marginTop: 25,
-		alignContent: "flex-end",
+		justifyContent: "center"
 	},
 	buttonText: {
 		color: "white",
