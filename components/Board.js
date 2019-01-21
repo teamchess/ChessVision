@@ -26,7 +26,7 @@ export default class Board extends React.Component {
           return (
             <View style={styles.row} key={yIndex}>
               {this.state.startingBoard[yIndex].map((piece, xIndex) => {
-                return <Square piece={piece} coords={[xIndex, yIndex]} key={`${(yIndex, xIndex)}`} />;
+                return <Square piece={piece} coords={{y: yIndex, x: xIndex}} key={`${(yIndex, xIndex)}`} />;
               })}
             </View>
           );
