@@ -19,7 +19,7 @@ export default class App extends React.Component {
 		this.state = {
 			image: null,
 			certainty: null,
-			fen: "",
+			fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
 			buttonPressed: false,
 		};
 
@@ -82,8 +82,7 @@ export default class App extends React.Component {
 	};
 
 	sendImage() {
-		// change to 162.243.160.170 in production
-		fetch("http://192.168.1.14:3000", {
+		fetch("https://ronlaniado.me/", {
 			method: "POST",
 			headers: {
 				Accept: "application/json",
@@ -98,15 +97,6 @@ export default class App extends React.Component {
 				this.setState({ fen: body.fen, certainty: body.certainty })
 			)
 			.catch((x) => console.log(x));
-	}
-
-	displayFenAndCertainty() {
-		return (
-			<>
-				<Text>certainty: {this.state.certainty}</Text>
-				<Text>fen: {this.state.fen}</Text>
-			</>
-		);
 	}
 
 	copyToClipboard() {
@@ -132,7 +122,7 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Board />
+				<Board fen={this.state.fen} />
 				{/* <View style={styles.fen}>
           <Text
             style={{
@@ -153,9 +143,11 @@ export default class App extends React.Component {
               : this.loadingIndicator()}
           </TouchableOpacity>
         </View>
-        <Text style={styles.certainty}>certainty: {this.state.certainty}</Text> */}
-        <Button title="Upload Image" />
-        <Button title="Take Photo" />
+				<Text style={styles.certainty}>certainty: {this.state.certainty}</Text> */}
+				<Text>{this.state.fen}</Text>
+				<Text>{this.state.certainty}</Text>
+        <Button onPress={this.pickImage} title="Upload Image" />
+        <Button onPress={this.takePhoto} title="Take Photo" />
 			</View>
 		);
 	}
