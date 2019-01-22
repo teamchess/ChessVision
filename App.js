@@ -82,7 +82,7 @@ export default class App extends React.Component {
 	};
 
 	sendImage() {
-		fetch("https://ronlaniado.me/", {
+		fetch("https://api.ronlaniado.me/", {
 			method: "POST",
 			headers: {
 				Accept: "application/json",
