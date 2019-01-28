@@ -12,6 +12,8 @@ import { Permissions, ImagePicker } from "expo";
 import Board from "./components/Board";
 import Button from "./components/Button";
 
+const FEN_DEFAULT = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+
 export default class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -19,7 +21,7 @@ export default class App extends React.Component {
 		this.state = {
 			image: null,
 			certainty: null,
-			fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+			fen: FEN_DEFAULT,
 			buttonPressed: false,
 		};
 
@@ -36,7 +38,6 @@ export default class App extends React.Component {
 		if (cameraRollPerm === "granted") {
 			let pickerResult = await ImagePicker.launchImageLibraryAsync({
 				base64: true,
-				allowsEditing: true,
 				aspect: [1, 1],
 			});
 
@@ -65,7 +66,6 @@ export default class App extends React.Component {
 		if (cameraPerm === "granted" && cameraRollPerm === "granted") {
 			let pickerResult = await ImagePicker.launchCameraAsync({
 				base64: true,
-				allowsEditing: true,
 				aspect: [1, 1],
 			});
 
@@ -94,7 +94,7 @@ export default class App extends React.Component {
 		})
 			.then((resp) => resp.json())
 			.then((body) =>
-				this.setState({ fen: body.fen, certainty: body.certainty })
+				this.setState({ error: body.message || null, fen: body.fen || FEN_DEFAULT, certainty: body.certainty })
 			)
 			.catch((x) => console.log(x));
 	}
@@ -123,28 +123,8 @@ export default class App extends React.Component {
 		return (
 			<View style={styles.container}>
 				<Board fen={this.state.fen} />
-				{/* <View style={styles.fen}>
-          <Text
-            style={{
-              fontSize: 18,
-              color: "black",
-              marginLeft: "17%",
-              width: "100%"
-            }}
-          >
-            FEN: (click to copy to clipboard)
-          </Text>
-          <TouchableOpacity
-            onPress={this.copyToClipboard}
-            style={styles.clipboard}
-          >
-            {!this.state.buttonPressed
-              ? <Text style={styles.fenString}>{this.state.fen}</Text>
-              : this.loadingIndicator()}
-          </TouchableOpacity>
-        </View>
-				<Text style={styles.certainty}>certainty: {this.state.certainty}</Text> */}
-				<Text>{this.state.fen}</Text>
+
+				<Text>{this.state.message || this.state.fen}</Text>
 				<Text>{this.state.certainty}</Text>
         <Button onPress={this.pickImage} title="Upload Image" />
         <Button onPress={this.takePhoto} title="Take Photo" />
