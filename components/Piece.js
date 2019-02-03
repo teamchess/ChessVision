@@ -71,5 +71,6 @@ const styles = StyleSheet.create({
 		width: Dimensions.get("window").width / 9,
 		height: Dimensions.get("window").width / 9,
 		alignSelf: "center",
+		position: "absolute",
 	},
 });

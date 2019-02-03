@@ -23,7 +23,16 @@ export default class Square extends React.Component {
 				}}
 			>
 				{this.props.coords.x === 0 ? (
-					<Text style={styles.coords}>{this.props.coords.y}</Text>
+					<Text style={styles.vertCoords}>
+						{Math.abs(8 - this.props.coords.y)}
+					</Text>
+				) : (
+					<Text />
+				)}
+				{this.props.coords.y === 7 ? (
+					<Text style={styles.horiCoords}>
+						{letters[this.props.coords.x]}
+					</Text>
 				) : (
 					<Text />
 				)}
@@ -32,16 +41,24 @@ export default class Square extends React.Component {
 		);
 	}
 }
-
+//Letters variable is used for rendering the bottom letters row
+const letters = ["a", "b", "c", "d", "e", "f", "g", "h"];
 const styles = StyleSheet.create({
 	square: {
 		flex: 1,
 	},
-	coords: {
+	vertCoords: {
 		color: "#c4c4c4",
 		position: "absolute",
 		fontSize: 12,
-		padding: 0,
-		margin: 0,
+		marginLeft: 2,
+	},
+	horiCoords: {
+		color: "#c4c4c4",
+		position: "absolute",
+		fontSize: 12,
+		bottom: 0,
+		right: 0,
+		marginRight: 2,
 	},
 });
