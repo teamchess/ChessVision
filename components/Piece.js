@@ -2,31 +2,31 @@ import React from "react";
 import { Dimensions, StyleSheet, Image } from "react-native";
 
 const PIECES = {
-  b: {
-    B: require("../assets/pieces/bB.png"),
-    K: require("../assets/pieces/bK.png"),
-    N: require("../assets/pieces/bN.png"),
-    P: require("../assets/pieces/bP.png"),
-    Q: require("../assets/pieces/bQ.png"),
-    R: require("../assets/pieces/bR.png")
-  },
-  w: {
-    B: require("../assets/pieces/wB.png"),
-    K: require("../assets/pieces/wK.png"),
-    N: require("../assets/pieces/wN.png"),
-    P: require("../assets/pieces/wP.png"),
-    Q: require("../assets/pieces/wQ.png"),
-    R: require("../assets/pieces/wR.png")
-  }
+	b: {
+		B: require("../assets/pieces/bB.png"),
+		K: require("../assets/pieces/bK.png"),
+		N: require("../assets/pieces/bN.png"),
+		P: require("../assets/pieces/bP.png"),
+		Q: require("../assets/pieces/bQ.png"),
+		R: require("../assets/pieces/bR.png"),
+	},
+	w: {
+		B: require("../assets/pieces/wB.png"),
+		K: require("../assets/pieces/wK.png"),
+		N: require("../assets/pieces/wN.png"),
+		P: require("../assets/pieces/wP.png"),
+		Q: require("../assets/pieces/wQ.png"),
+		R: require("../assets/pieces/wR.png"),
+	},
 };
 
-export default class Piece extends React.Component {	
+export default class Piece extends React.Component {
 	getPieceImage(num) {
 		const color = num > 10 ? "b" : "w";
 		const colorPieces = PIECES[color];
 		let letter = null;
 
-		const n = num > 10 ? num - 10 : num
+		const n = num > 10 ? num - 10 : num;
 		// Subtract 10 if the number is black
 		switch (n) {
 			case 0:
@@ -50,21 +50,26 @@ export default class Piece extends React.Component {
 				letter = "P";
 				break;
 			default:
-				throw `ERROR: Unrecognizable Piece (${n})`
+				throw `ERROR: Unrecognizable Piece (${n})`;
 		}
 
 		return colorPieces[letter];
 	}
 
-  render() {
-    return <Image source={this.getPieceImage(this.props.number)} style={styles.pieces} />;
+	render() {
+		return (
+			<Image
+				source={this.getPieceImage(this.props.number)}
+				style={styles.pieces}
+			/>
+		);
 	}
 }
 
 const styles = StyleSheet.create({
-  pieces: {
-		width: Dimensions.get("window").width / 10,
+	pieces: {
+		width: Dimensions.get("window").width / 9,
 		height: Dimensions.get("window").width / 9,
 		alignSelf: "center",
-  }
+	},
 });

@@ -4,7 +4,6 @@ import {
 	Text,
 	View,
 	TouchableOpacity,
-	Clipboard,
 	ActivityIndicator,
 } from "react-native";
 import { Permissions, ImagePicker } from "expo";
@@ -26,7 +25,6 @@ export default class App extends React.Component {
 		};
 
 		this.sendImage = this.sendImage.bind(this);
-		this.copyToClipboard = this.copyToClipboard.bind(this);
 	}
 
 	pickImage = async () => {
@@ -94,29 +92,13 @@ export default class App extends React.Component {
 		})
 			.then((resp) => resp.json())
 			.then((body) =>
-				this.setState({ error: body.message || null, fen: body.fen || FEN_DEFAULT, certainty: body.certainty })
+				this.setState({
+					error: body.message || null,
+					fen: body.fen || FEN_DEFAULT,
+					certainty: body.certainty,
+				})
 			)
 			.catch((x) => console.log(x));
-	}
-
-	copyToClipboard() {
-		Clipboard.setString(this.state.fen);
-		alert(
-			"Copied FEN to clipboard. Now you can paste this into any Chess engine and it will show you the board!"
-		);
-		console.log("FEN copied to clipboard");
-	}
-
-	loadingIndicator() {
-		return (
-			<>
-				<ActivityIndicator
-					size="large"
-					color="black"
-					style={{ marginTop: "20%" }}
-				/>
-			</>
-		);
 	}
 
 	render() {
@@ -126,8 +108,8 @@ export default class App extends React.Component {
 
 				<Text>{this.state.message || this.state.fen}</Text>
 				<Text>{this.state.certainty}</Text>
-        <Button onPress={this.pickImage} title="Upload Image" />
-        <Button onPress={this.takePhoto} title="Take Photo" />
+				<Button onPress={this.pickImage} title="Upload Image" />
+				<Button onPress={this.takePhoto} title="Take Photo" />
 			</View>
 		);
 	}
@@ -147,15 +129,6 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		borderRadius: 30,
 		borderWidth: 2,
-	},
-	clipboard: {
-		width: "90%",
-		height: "80%",
-		borderRadius: 30,
-		marginLeft: "5%",
-		backgroundColor: "grey",
-		color: "#f0f5f5",
-		textAlignVertical: "center",
 	},
 	fenString: {
 		width: "60%",
