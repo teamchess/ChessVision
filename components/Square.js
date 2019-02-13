@@ -8,6 +8,7 @@ import Piece from "./Piece";
 export default class Square extends React.Component {
 	isDarkSquare() {
 		const { x, y } = this.props.coords;
+		console.log(this.props.coords);
 		return (y % 2 !== 0 && x % 2 !== 0) || (y % 2 === 0 && x % 2 === 0);
 	}
 
