@@ -15,7 +15,8 @@
     "react": "16.5.0",
     "react-chessboardjs-wrapper": "^0.4.2",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
-    "react-native-cli": "^2.0.1"
+    "react-native-cli": "^2.0.1",
+    "react-navigation": "^3.2.1"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"
