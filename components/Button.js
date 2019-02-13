@@ -8,7 +8,10 @@ export default class Button extends React.Component {
 	}
 	render() {
 		return (
-			<TouchableOpacity style={styles.button} onPress={this.props.onPress}>
+			<TouchableOpacity
+				style={styles.button}
+				onPress={this.props.onPress}
+			>
 				<Text style={styles.buttonText}>{this.props.title}</Text>
 			</TouchableOpacity>
 		);
@@ -16,13 +19,12 @@ export default class Button extends React.Component {
 }
 const styles = StyleSheet.create({
 	button: {
-		backgroundColor: "#0088cc",
-		width: "75%",
-		height: 50,
-		borderRadius: 15,
-		padding: 10,
-		marginTop: 25,
-		justifyContent: "center"
+		backgroundColor: "#373737",
+		marginTop: 300,
+		marginRight: 100,
+		borderRadius: 10,
+		height: 100,
+		width: 100,
 	},
 	buttonText: {
 		color: "white",
