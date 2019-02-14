@@ -1,7 +1,8 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Board from "./components/Board";
-import Button from "./components/Button";
+import { StyleSheet, Text, View, Image } from "react-native";
+import Board from "./components/board/Board";
+import Button from "./components/ui/Button";
+import Toolbar from "./components/ui/Toolbar";
 
 const FEN_DEFAULT = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
@@ -41,7 +42,8 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Button title="test" onPress={this.sendImage} />
+				<Board fen={FEN_DEFAULT} />
+				<Toolbar />
 			</View>
 		);
 	}

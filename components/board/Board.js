@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Dimensions, StyleSheet } from "react-native";
 import Square from "./Square";
-import { parseFEN } from "../Utils";
+import { parseFEN } from "../../Utils";
 
 export default class Board extends React.Component {
 	flipBoard = (boardArray) => {
