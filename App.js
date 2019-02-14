@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Board from "./components/board/Board";
 import Button from "./components/ui/Button";
 import Toolbar from "./components/ui/Toolbar";
@@ -17,6 +17,7 @@ export default class App extends React.Component {
 			buttonPressed: false,
 		};
 	}
+	
 	sendImage() {
 		fetch("https://api.ronlaniado.me/", {
 			method: "POST",
