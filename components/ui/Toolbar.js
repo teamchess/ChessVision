@@ -27,7 +27,8 @@ const Item = props => {
 const styles = StyleSheet.create({
   outer: {
     position: "absolute",
-    display: "flex",
+    // display: "flex",
+    flex: 1,
     flexDirection: "row",
     alignSelf: "center",
     justifyContent: "space-between",

@@ -1,59 +1,40 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import Board from "./components/board/Board";
-import Button from "./components/ui/Button";
+import { StyleSheet, View, Dimensions } from "react-native";
+import { NativeRouter, Route, Redirect, Switch } from "react-router-native";
+
 import Toolbar from "./components/ui/Toolbar";
 
-const FEN_DEFAULT = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+import Editor from "./components/pages/editor";
+import Analysis from "./components/pages/analysis";
+import Scan from "./components/pages/scan";
+import Clock from "./components/pages/clock";
+import Profile from "./components/pages/profile";
 
 export default class App extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			image: null,
-			certainty: null,
-			fen: FEN_DEFAULT,
-			buttonPressed: false,
-		};
-	}
-	
-	sendImage() {
-		fetch("https://api.ronlaniado.me/", {
-			method: "POST",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				image: this.state.image,
-			}),
-		})
-			.then((resp) => resp.json())
-			.then((body) =>
-				this.setState({
-					error: body.message || null,
-					fen: body.fen || FEN_DEFAULT,
-					certainty: body.certainty,
-				})
-			)
-			.catch((x) => console.log(x));
-	}
-
-	render() {
-		return (
-			<View style={styles.container}>
-				<Board fen={FEN_DEFAULT} />
-				<Toolbar />
-			</View>
-		);
-	}
+  render() {
+    return (
+      <NativeRouter>
+        <View style={styles.container}>
+          <Switch>
+            <Redirect exact from="/" to="/editor" />
+            <Route exact path="/editor" component={Editor} />
+            <Route exact path="/analysis" component={Analysis} />
+            <Route exact path="/scan" component={Scan} />
+            <Route exact path="/clock" component={Clock} />
+            <Route exact path="/profile" component={Profile} />
+          </Switch>
+          <Toolbar />
+        </View>
+      </NativeRouter>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-	container: {
-		backgroundColor: "#272727",
-		width: "100%",
-		height: "100%",
-	},
+  container: {
+    flex: 1,
+    backgroundColor: "#272727",
+    justifyContent: "center",
+    flexDirection: "column"
+  }
 });

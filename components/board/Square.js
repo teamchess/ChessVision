@@ -40,6 +40,7 @@ export default class Square extends React.Component {
 		);
 	}
 }
+
 //Letters variable is used for rendering the bottom letters row
 const letters = ["a", "b", "c", "d", "e", "f", "g", "h"];
 const styles = StyleSheet.create({
