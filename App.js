@@ -4,11 +4,11 @@ import { NativeRouter, Route, Redirect, Switch } from "react-router-native";
 
 import Toolbar from "./components/ui/Toolbar";
 
-import Editor from "./components/pages/editor";
-import Analysis from "./components/pages/analysis";
-import Scan from "./components/pages/scan";
-import Clock from "./components/pages/clock";
-import Profile from "./components/pages/profile";
+import Editor from "./components/pages/Editor";
+import Analysis from "./components/pages/Analysis";
+import Scan from "./components/pages/Scan";
+import Clock from "./components/pages/Clock";
+import Profile from "./components/pages/Profile";
 
 export default class App extends React.Component {
   render() {
@@ -34,7 +34,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#272727",
-    justifyContent: "center",
-    flexDirection: "column"
   }
 });
