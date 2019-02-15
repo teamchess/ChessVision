@@ -17,8 +17,8 @@ export default class Square extends React.Component {
 				style={{
 					...styles.square,
 					backgroundColor: this.isDarkSquare()
-						? "#eaeaea"
-						: "#0c56ad",
+						? "#1B595C"
+						: "#8E8E93",
 				}}
 			>
 				{this.props.coords.x === 0 ? (
