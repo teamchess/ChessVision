@@ -20,14 +20,14 @@ const Item = withRouter(props => {
   const { title, image, location, history } = props;
   const itemPath = `/${title.toLowerCase()}`;
 
-  const isSelected = () => {
-    return location.pathname === itemPath;
+  const getColor = () => {
+    return location.pathname === itemPath ? "#FFFFFF" : "#8E8E93";
   };
 
   return (
     <TouchableOpacity style={styles.item} onPress={() => history.push(itemPath)}>
-      <Image style={styles.image} source={image} />
-      <Text style={{ ...styles.text, color: isSelected() ? "#FFFFFF" : "#8E8E93" }}>{title}</Text>
+      <Image style={{ ...styles.image, tintColor: getColor() }} source={image} />
+      <Text style={{ ...styles.text, color: getColor() }}>{title}</Text>
     </TouchableOpacity>
   );
 });
