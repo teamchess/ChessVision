@@ -3,20 +3,20 @@ import { Dimensions, StyleSheet, Image } from "react-native";
 
 const PIECES = {
 	b: {
-		B: require("../assets/pieces/bB.png"),
-		K: require("../assets/pieces/bK.png"),
-		N: require("../assets/pieces/bN.png"),
-		P: require("../assets/pieces/bP.png"),
-		Q: require("../assets/pieces/bQ.png"),
-		R: require("../assets/pieces/bR.png"),
+		B: require("../../assets/pieces/bB.png"),
+		K: require("../../assets/pieces/bK.png"),
+		N: require("../../assets/pieces/bN.png"),
+		P: require("../../assets/pieces/bP.png"),
+		Q: require("../../assets/pieces/bQ.png"),
+		R: require("../../assets/pieces/bR.png"),
 	},
 	w: {
-		B: require("../assets/pieces/wB.png"),
-		K: require("../assets/pieces/wK.png"),
-		N: require("../assets/pieces/wN.png"),
-		P: require("../assets/pieces/wP.png"),
-		Q: require("../assets/pieces/wQ.png"),
-		R: require("../assets/pieces/wR.png"),
+		B: require("../../assets/pieces/wB.png"),
+		K: require("../../assets/pieces/wK.png"),
+		N: require("../../assets/pieces/wN.png"),
+		P: require("../../assets/pieces/wP.png"),
+		Q: require("../../assets/pieces/wQ.png"),
+		R: require("../../assets/pieces/wR.png"),
 	},
 };
 
