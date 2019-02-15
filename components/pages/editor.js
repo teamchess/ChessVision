@@ -20,13 +20,14 @@ export default class Editor extends React.Component {
   render() {
     return (
       <View styles={styles.container}>
-        <Board fen={this.state.fen} />
+        <Board style={styles.board} fen={this.state.fen} />
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  board: {
+    marginTop: Dimensions.get("window").height * 0.16
   }
 });
