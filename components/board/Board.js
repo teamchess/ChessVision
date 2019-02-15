@@ -8,15 +8,13 @@ export default props => {
 
   return (
     <View style={{ ...styles.board, ...props.style }}>
-      {board.map((_, yIndex) => {
-        return (
-          <View style={styles.row} key={yIndex}>
-            {board[yIndex].map((piece, xIndex) => {
-              return <Square piece={piece} coords={{ y: yIndex, x: xIndex }} key={`${(yIndex, xIndex)}`} />;
-            })}
-          </View>
-        );
-      })}
+      {board.map((_, yIndex) => (
+        <View style={styles.row} key={yIndex}>
+          {board[yIndex].map((piece, xIndex) => (
+            <Square piece={piece} coords={{ y: yIndex, x: xIndex }} key={`${(yIndex, xIndex)}`} />
+          ))}
+        </View>
+      ))}
     </View>
   );
 };
