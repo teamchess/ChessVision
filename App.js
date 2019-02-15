@@ -41,7 +41,7 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Button title="test" onPress={this.sendImage} />
+				<Button source={require("./assets/icons/upload.png")} onPress={this.sendImage}>Test</Button>
 			</View>
 		);
 	}
