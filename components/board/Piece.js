@@ -2,75 +2,60 @@ import React from "react";
 import { Dimensions, StyleSheet, Image } from "react-native";
 
 const PIECES = {
-	b: {
-		B: require("../../assets/pieces/bB.png"),
-		K: require("../../assets/pieces/bK.png"),
-		N: require("../../assets/pieces/bN.png"),
-		P: require("../../assets/pieces/bP.png"),
-		Q: require("../../assets/pieces/bQ.png"),
-		R: require("../../assets/pieces/bR.png"),
-	},
-	w: {
-		B: require("../../assets/pieces/wB.png"),
-		K: require("../../assets/pieces/wK.png"),
-		N: require("../../assets/pieces/wN.png"),
-		P: require("../../assets/pieces/wP.png"),
-		Q: require("../../assets/pieces/wQ.png"),
-		R: require("../../assets/pieces/wR.png"),
-	},
+  bishop: require("../../assets/pieces/bishop.png"),
+  king: require("../../assets/pieces/king.png"),
+  knight: require("../../assets/pieces/knight.png"),
+  pawn: require("../../assets/pieces/pawn.png"),
+  queen: require("../../assets/pieces/queen.png"),
+  rook: require("../../assets/pieces/rook.png")
 };
 
 export default class Piece extends React.Component {
-	getPieceImage(num) {
-		const color = num > 10 ? "b" : "w";
-		const colorPieces = PIECES[color];
-		let letter = null;
+  isBlack() {
+    return this.props.number > 10;
+  }
 
-		const n = num > 10 ? num - 10 : num;
-		// Subtract 10 if the number is black
-		switch (n) {
-			case 0:
-				return;
-			case 1:
-				letter = "R";
-				break;
-			case 2:
-				letter = "N";
-				break;
-			case 3:
-				letter = "B";
-				break;
-			case 4:
-				letter = "Q";
-				break;
-			case 5:
-				letter = "K";
-				break;
-			case 6:
-				letter = "P";
-				break;
-			default:
-				throw `ERROR: Unrecognizable Piece (${n})`;
-		}
+  getPieceImage(num) {
+    // Subtract 10 if the number is black
+    const n = this.isBlack() ? num - 10 : num;
 
-		return colorPieces[letter];
-	}
+    const { bishop, king, knight, pawn, queen, rook } = PIECES;
 
-	render() {
-		return (
-			<Image
-				source={this.getPieceImage(this.props.number)}
-				style={styles.pieces}
-			/>
-		);
-	}
+    switch (n) {
+      case 0:
+        return;
+      case 1:
+        return rook;
+      case 2:
+        return knight;
+      case 3:
+        return bishop;
+      case 4:
+        return queen;
+      case 5:
+        return king;
+      case 6:
+        return pawn;
+      default:
+        throw `ERROR: Unrecognizable Piece (${n})`;
+    }
+  }
+
+  render() {
+    return (
+      <Image
+        source={this.getPieceImage(this.props.number)}
+        style={{ ...styles.pieces, tintColor: this.isBlack() ? null : "white" }}
+      />
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-	pieces: {
-		width: Dimensions.get("window").width / 9,
-		height: Dimensions.get("window").width / 9,
-		alignSelf: "center",
-		position: "absolute",
-	},
+  pieces: {
+		height: "85%",
+		resizeMode: "contain",
+    alignSelf: "center",
+    position: "absolute"
+  }
 });
