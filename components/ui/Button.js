@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, StyleSheet, Image } from "react-native";
 
 export default props => {
   return (
-    <TouchableOpacity style={styles.button} onPress={props.onPress}>
+    <TouchableOpacity style={{ ...styles.button, ...props.style }} onPress={props.onPress}>
       <Image source={props.source} style={styles.icon} />
       <Text style={styles.buttonText}>{props.children}</Text>
     </TouchableOpacity>
