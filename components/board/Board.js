@@ -21,8 +21,8 @@ export default props => {
 
 const styles = StyleSheet.create({
   board: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").width
+    width: Dimensions.get("window").width * 0.95,
+    height: Dimensions.get("window").width * 0.95
   },
   row: {
     flex: 1,
