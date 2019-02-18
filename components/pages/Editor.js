@@ -1,6 +1,7 @@
 import React from "react";
 import { Clipboard, TouchableOpacity, TouchableWithoutFeedback, View, Text, Image } from "react-native";
 
+import Button from "../ui/Button";
 import Board from "../board/Board";
 
 import styles from "../../styles/pages/editor";
@@ -27,6 +28,7 @@ export default class Editor extends React.Component {
         <Board style={styles.board} fen={this.state.fen} />
         <FenDisplay fen={this.state.fen} />
         <PieceSelector piecePickerColor={this.state.piecePickerColor} />
+        <ActionButtons />
       </View>
     );
   }
@@ -72,3 +74,18 @@ const PieceSelector = props => {
 const PieceSelectorPiece = props => {
   return <Image style={{ ...styles.piecePickerPiece, tintColor: props.color }} source={props.source} />;
 };
+
+const ActionButtons = _ => {
+  return (
+    <View style={styles.actionButtonContainer}>
+      <ActionButton source={require("../../assets/icons/reverse.png")} />
+      <ActionButton source={require("../../assets/icons/reset.png")} />
+      <ActionButton source={require("../../assets/icons/save.png")} />
+      <ActionButton source={require("../../assets/icons/upload.png")} />
+    </View>
+  )
+}
+
+const ActionButton = props => {
+  return <Button style={styles.actionButton} source={props.source} />
+}

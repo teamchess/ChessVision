@@ -7,7 +7,7 @@ const dimensions = { width: Dimensions.get("window").width, height: Dimensions.g
 
 export default StyleSheet.create({
   board: {
-    marginTop: dimensions.height * 0.13,
+    marginTop: dimensions.height * 0.1,
     alignSelf: "center"
   },
 
@@ -86,5 +86,15 @@ export default StyleSheet.create({
     flex: 1,
     height: "45%",
     resizeMode: "contain"
+  },
+
+  actionButtonContainer: {
+    justifyContent: "space-between",
+    alignItems: "center",
+    alignSelf: "center",
+    flex: 1,
+    flexDirection: "row",
+    width: uiWidth,
+    marginTop: dimensions.height * 0.06
   }
 });
