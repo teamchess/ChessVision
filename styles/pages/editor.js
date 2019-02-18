@@ -53,14 +53,14 @@ export default StyleSheet.create({
     ...uiStyles.shadow
   },
   colorSelector: {
-    flex: 0.3,
+    flex: 0.27,
     ...uiStyles.centerContent,
     borderRightWidth: 0.75,
     borderRightColor: "#272727"
   },
   colorSelectorGraphic: {
     width: "75%",
-    height: "45%",
+    height: "50%",
     flexDirection: "row",
   },
   colorSelectorBlack: {
@@ -78,8 +78,9 @@ export default StyleSheet.create({
 
   piecePicker: {
     flexDirection: "row",
-    flex: 0.7,
-    ...uiStyles.centerContent
+    flex: 0.73,
+    justifyContent: "space-evenly",
+    alignItems: "center"
   },
   piecePickerPiece: {
     flex: 1,

@@ -61,8 +61,8 @@ const PieceSelector = props => {
         </View>
       </View>
       <View style={styles.piecePicker}>
-        {Object.values(PIECES_IMAGES).map(img => (
-          <PieceSelectorPiece color={props.piecePickerColor} source={img} key={img} />
+        {["pawn", "bishop", "knight", "rook", "queen", "king"].map(p => (
+          <PieceSelectorPiece color={props.piecePickerColor} source={PIECES_IMAGES[p]} key={p} />
         ))}
       </View>
     </View>
