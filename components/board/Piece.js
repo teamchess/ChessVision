@@ -1,7 +1,7 @@
 import React from "react";
 import { Dimensions, StyleSheet, Image } from "react-native";
 
-const PIECES = {
+export const PIECES = {
   bishop: require("../../assets/pieces/bishop.png"),
   king: require("../../assets/pieces/king.png"),
   knight: require("../../assets/pieces/knight.png"),
