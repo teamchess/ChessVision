@@ -20,6 +20,14 @@ export default class Editor extends React.Component {
       buttonPressed: false,
       piecePickerColor: "white"
     };
+
+    this.setPickerColor = this.setPickerColor.bind(this);
+  }
+
+  setPickerColor(color) {
+    this.setState({
+      piecePickerColor: color
+    })
   }
 
   render() {
@@ -27,7 +35,7 @@ export default class Editor extends React.Component {
       <View styles={styles.container}>
         <Board style={styles.board} fen={this.state.fen} />
         <FenDisplay fen={this.state.fen} />
-        <PieceSelector piecePickerColor={this.state.piecePickerColor} />
+        <PieceSelector piecePickerColor={this.state.piecePickerColor} setPickerColor={this.setPickerColor} />
         <ActionButtons />
       </View>
     );
@@ -54,10 +62,10 @@ const PieceSelector = props => {
     <View style={styles.pieceSelector}>
       <View style={styles.colorSelector}>
         <View style={styles.colorSelectorGraphic}>
-          <TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => props.setPickerColor("white")}>
             <View style={styles.colorSelectorWhite} />
           </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => props.setPickerColor("black")}>
             <View style={styles.colorSelectorBlack} />
           </TouchableWithoutFeedback>
         </View>
