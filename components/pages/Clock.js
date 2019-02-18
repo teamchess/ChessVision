@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import ModalSelector from "react-native-modal-selector";
 import Modal from "react-native-modal";
 import Button from "../ui/Button";
 
