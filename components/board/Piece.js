@@ -68,9 +68,12 @@ export default class Piece extends React.Component {
 
 const styles = StyleSheet.create({
 	pieces: {
-		width: Dimensions.get("window").width / 9,
-		height: Dimensions.get("window").width / 9,
-		alignSelf: "center",
+		flex: 1,
+		width: Dimensions.get("window").width / 11,
+		height: Dimensions.get("window").width / 11,
 		position: "absolute",
+		alignSelf: "center",
+		alignContent: "flex-end",
+		marginTop: 10,
 	},
 });
