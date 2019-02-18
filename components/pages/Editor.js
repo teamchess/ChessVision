@@ -10,8 +10,8 @@ import { PIECES as PIECES_IMAGES } from "../board/Piece";
 const FEN_DEFAULT = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
 export default class Editor extends React.Component {
-  constructor(props) {
-    super(props);
+	constructor(props) {
+		super(props);
 
     this.state = {
       image: null,
