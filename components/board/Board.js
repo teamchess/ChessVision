@@ -5,11 +5,12 @@ import { parseFEN } from "../../Utils";
 
 export default props => {
   const board = parseFEN(props.fen);
+  const { flip } = props;
 
   return (
-    <View style={{ ...styles.board, ...props.style }}>
+    <View style={{ ...styles.board, flexDirection: flip ? "column-reverse" : "column", ...props.style }}>
       {board.map((_, yIndex) => (
-        <View style={styles.row} key={yIndex}>
+        <View style={{ ...styles.row, flexDirection: flip ? "row-reverse" : "row" }} key={yIndex}>
           {board[yIndex].map((piece, xIndex) => (
             <Square piece={piece} coords={{ y: yIndex, x: xIndex }} key={`${(yIndex, xIndex)}`} />
           ))}
@@ -25,7 +26,6 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").width * 0.95
   },
   row: {
-    flex: 1,
-    flexDirection: "row"
+    flex: 1
   }
 });

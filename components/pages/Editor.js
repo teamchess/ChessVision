@@ -14,14 +14,13 @@ export default class Editor extends React.Component {
     super(props);
 
     this.state = {
-      image: null,
-      certainty: null,
       fen: FEN_DEFAULT,
-      buttonPressed: false,
+      flipBoard: false,
       piecePickerColor: "white"
     };
 
     this.setPickerColor = this.setPickerColor.bind(this);
+    this.flipBoard = this.flipBoard.bind(this);
   }
 
   setPickerColor(color) {
@@ -30,14 +29,20 @@ export default class Editor extends React.Component {
     })
   }
 
+  flipBoard() {
+    this.setState(prevState => ({
+      flipBoard: !prevState.flipBoard
+    }))
+  }
+
   render() {
     return (
       <View styles={styles.container}>
-        <Board style={styles.board} fen={this.state.fen} />
+        <Board style={styles.board} fen={this.state.fen} flip={this.state.flipBoard} />
         <FenDisplay fen={this.state.fen} />
         <PieceSelector piecePickerColor={this.state.piecePickerColor} setPickerColor={this.setPickerColor} />
         <View style={styles.actionButtonContainer}>
-          <ActionButton source={require("../../assets/icons/reverse.png")} onPress={}/>
+          <ActionButton source={require("../../assets/icons/reverse.png")} onPress={this.flipBoard}/>
           <ActionButton source={require("../../assets/icons/reset.png")} />
           <ActionButton source={require("../../assets/icons/save.png")} />
           <ActionButton source={require("../../assets/icons/upload.png")} />
