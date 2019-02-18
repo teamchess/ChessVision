@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, StyleSheet, Image } from "react-native";
+import { StyleSheet, Image } from "react-native";
 
 export const PIECES = {
   bishop: require("../../assets/pieces/bishop.png"),
