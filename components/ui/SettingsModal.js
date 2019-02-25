@@ -1,47 +1,25 @@
 import React from "react";
 import { View, StyleSheet, Text, Picker } from "react-native";
 import Modal from "react-native-modal";
-import Slider from "react-native-slider";
+import SuddenDeath from "../ui/SuddenDeath";
+import Increment from "../ui/Increment";
 
 export default class SettingsModal extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			clockStyle: "Please select a clock style...",
-			incrementVal: 5,
-			timeVal: 5,
 		};
-	}
-	sliderChangeIncrement(value) {
-		this.setState({
-			incrementVal: value,
-		});
-	}
-	sliderChangeTime(value) {
-		this.setState({
-			timeVal: value,
-		});
 	}
 	showSuddenDeathSettings() {
 		if (this.state.clockStyle === "sudden_death") {
-			return (
-				<SuddenDeath
-					timeVal={this.state.timeVal}
-					sliderChangeTime={(value) => this.sliderChangeTime(value)}
-				/>
-			);
+			return <SuddenDeath />;
 		}
 	}
 	showIncrementSettings() {
 		if (this.state.clockStyle === "increment") {
 			return (
 				<Increment
-					incrementVal={this.state.incrementVal}
-					timeVal={this.state.incrementVal}
-					sliderChangeTime={(value) => this.sliderChangeTime(value)}
-					sliderChangeIncrement={(value) =>
-						this.sliderChangeIncrement(value)
-					}
 				/>
 			);
 		}
@@ -97,54 +75,6 @@ export default class SettingsModal extends React.Component {
 		);
 	}
 }
-
-const SuddenDeath = (props) => {
-	return (
-		<View>
-			<View style={styles.sliderContainer}>
-				<Text style={styles.sliderText}>
-					Time for each side: {parseInt(props.timeVal)} mins
-				</Text>
-				<Slider
-					style={styles.slider}
-					value={props.timeVal}
-					onValueChange={props.sliderChangeTime}
-					minimumValue={1}
-					maximumValue={360}
-					minimumTrackTintColor="#1fb28a"
-					maximumTrackTintColor="#d3d3d3"
-					thumbTintColor="#1a9274"
-				/>
-			</View>
-		</View>
-	);
-};
-
-const Increment = (props) => {
-	return (
-		<View>
-			<SuddenDeath
-				timeVal={props.timeVal}
-				sliderChangeTime={props.sliderChangeTime}
-			/>
-			<View style={styles.sliderContainer}>
-				<Text style={styles.sliderText}>
-					Increment by: {parseInt(props.incrementVal)} seconds
-				</Text>
-				<Slider
-					style={styles.slider}
-					value={props.incrementVal}
-					onValueChange={props.sliderChangeIncrement}
-					minimumValue={1}
-					maximumValue={360}
-					minimumTrackTintColor="#1fb28a"
-					maximumTrackTintColor="#d3d3d3"
-					thumbTintColor="#1a9274"
-				/>
-			</View>
-		</View>
-	);
-};
 
 const styles = StyleSheet.create({
 	modal: {
