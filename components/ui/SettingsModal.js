@@ -1,8 +1,9 @@
 import React from "react";
-import { View, StyleSheet, Text, Picker } from "react-native";
+import {View, StyleSheet, Text, Picker} from "react-native";
 import Modal from "react-native-modal";
 import SuddenDeath from "../ui/SuddenDeath";
 import Increment from "../ui/Increment";
+import IncrementWithHandicap from "./IncrementWithHandicap";
 
 export default class SettingsModal extends React.Component {
 	constructor(props) {
@@ -19,8 +20,19 @@ export default class SettingsModal extends React.Component {
 	showIncrementSettings() {
 		if (this.state.clockStyle === "increment") {
 			return (
-				<Increment
-				/>
+				<>
+					<SuddenDeath />
+					<Increment />
+				</>
+			);
+		}
+	}
+	showIncrementWithHandicapSettings() {
+		if (this.state.clockStyle === "increment_with_handicap") {
+			return (
+				<>
+					<IncrementWithHandicap />
+				</>
 			);
 		}
 	}
@@ -32,10 +44,9 @@ export default class SettingsModal extends React.Component {
 					onBackButtonPress={this.props.toggleModal}
 					onBackdropPress={this.props.toggleModal}
 					onSwipe={this.props.toggleModal}
-					swipeDirection="down"
-					animationIn="zoomIn"
-					animationOut="zoomOut"
-				>
+					swipeDirection='down'
+					animationIn='zoomIn'
+					animationOut='zoomOut'>
 					<View style={styles.modal}>
 						<Text style={styles.title}>Clock Settings</Text>
 						<View style={styles.picker}>
@@ -47,28 +58,28 @@ export default class SettingsModal extends React.Component {
 											clockStyle: itemValue,
 										});
 									}
-								}}
-							>
+								}}>
 								<Picker.Item
-									label="Select a clock type..."
-									value="default"
+									label='Select a clock type...'
+									value='default'
 								/>
 								<Picker.Item
-									label="Sudden Death"
-									value="sudden_death"
+									label='Sudden Death'
+									value='sudden_death'
 								/>
 								<Picker.Item
-									label="Increment"
-									value="increment"
+									label='Increment'
+									value='increment'
 								/>
 								<Picker.Item
-									label="Increment with Handicap"
-									value="increment_with_handicap"
+									label='Increment with Handicap'
+									value='increment_with_handicap'
 								/>
 							</Picker>
 						</View>
 						{this.showSuddenDeathSettings()}
 						{this.showIncrementSettings()}
+						{this.showIncrementWithHandicapSettings()}
 					</View>
 				</Modal>
 			</View>
@@ -112,5 +123,5 @@ const styles = StyleSheet.create({
 		marginLeft: "10%",
 		marginRight: "10%",
 	},
-	sliderText: { color: "#8e8e93", marginLeft: "10%", bottom: -10 },
+	sliderText: {color: "#8e8e93", marginLeft: "10%", bottom: -10},
 });
