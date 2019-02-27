@@ -2,18 +2,19 @@ import { StyleSheet, Dimensions } from "react-native";
 
 import uiStyles from "../ui";
 
-const dimensions = { width: Dimensions.get("window").width, height: Dimensions.get("window").height },
-  uiWidth = dimensions.width * 0.95;
+const WIDTH = Dimensions.get("window").width,
+  HEIGHT = Dimensions.get("window").height,
+  uiWidth = WIDTH * 0.95;
 
 export default StyleSheet.create({
   board: {
-    marginTop: dimensions.height * 0.1,
+    marginTop: HEIGHT * 0.1,
     alignSelf: "center"
   },
 
   fenDisplay: {
     width: uiWidth,
-    marginTop: dimensions.height * 0.03,
+    marginTop: HEIGHT * 0.03,
     height: 40,
     backgroundColor: "#373737",
     alignSelf: "center",
@@ -45,7 +46,7 @@ export default StyleSheet.create({
   pieceSelector: {
     width: uiWidth,
     height: 69,
-    marginTop: dimensions.width * 0.04,
+    marginTop: WIDTH * 0.04,
     backgroundColor: "#373737",
     flexDirection: "row",
     alignSelf: "center",
@@ -95,6 +96,7 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     width: uiWidth,
-    marginTop: dimensions.height * 0.06
+    height: 43 / 812 * HEIGHT,
+    marginTop: HEIGHT * 0.06
   }
 });

@@ -17,8 +17,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
     borderRadius: 10,
-    height: 55,
-    width: 55,
+    flex: 1,
     shadowColor: "black",
     shadowOpacity: 0.25,
     shadowOffset: {
@@ -33,8 +32,7 @@ const styles = StyleSheet.create({
     position: "absolute"
   },
   icon: {
-    height: 30,
-    width: 30,
+    flex: 1,
     position: "absolute",
     resizeMode: "contain"
   }

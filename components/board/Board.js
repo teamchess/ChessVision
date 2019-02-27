@@ -4,8 +4,8 @@ import Square from "./Square";
 import { parseFEN } from "../../Utils";
 
 export default props => {
-  const board = parseFEN(props.fen);
-  const { flip } = props;
+  const { flip, fen } = props;
+  const board = parseFEN(fen);
 
   return (
     <View style={{ ...styles.board, flexDirection: flip ? "column-reverse" : "column", ...props.style }}>
