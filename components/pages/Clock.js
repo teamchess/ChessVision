@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Picker } from "react-native";
+import {StyleSheet, Text, View, TouchableOpacity, Picker} from "react-native";
 import SettingsModal from "../ui/SettingsModal";
 import Button from "../ui/Button";
 
@@ -14,7 +14,7 @@ export default class Clock extends React.Component {
 	}
 
 	toggleModal() {
-		this.setState({ modalVisible: !this.state.modalVisible });
+		this.setState({modalVisible: !this.state.modalVisible});
 	}
 
 	render() {
@@ -51,13 +51,24 @@ const styles = StyleSheet.create({
 		justifyContent: "space-evenly",
 	},
 	white: {
-		flex: 1,
-		justifyContent: "center",
 		position: "absolute",
-		marginTop: 50,
+		marginTop: "17%",
 		height: 350,
-		width: 400,
+		width: "90%",
+		marginLeft: "5%",
+		marginRight: "5%",
+		justifyContent: "flex-start",
 		backgroundColor: "white",
 		borderRadius: 5,
+	},
+	black: {
+		position: "absolute",
+		bottom: 85,
+		height: 350,
+		width: "90%",
+		backgroundColor: "black",
+		borderRadius: 5,
+		marginLeft: "5%",
+		marginRight: "5%",
 	},
 });
