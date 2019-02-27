@@ -12,12 +12,15 @@ export default class SettingsModal extends React.Component {
 			clockStyle: "Please select a clock style...",
 		};
 	}
+
 	showSuddenDeathSettings() {
+		//If the users selects the Sudden Death option, it will load the Sudden Death component into the modal
 		if (this.state.clockStyle === "sudden_death") {
 			return <SuddenDeath />;
 		}
 	}
 	showIncrementSettings() {
+		//If the users selects the Increment option, it will load the Increment component into the modal
 		if (this.state.clockStyle === "increment") {
 			return (
 				<>
@@ -28,6 +31,7 @@ export default class SettingsModal extends React.Component {
 		}
 	}
 	showIncrementWithHandicapSettings() {
+		//If the users selects the Increment with Handicap option, it will load the IncrementWithHandicap component into the modal
 		if (this.state.clockStyle === "increment_with_handicap") {
 			return (
 				<>
