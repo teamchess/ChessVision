@@ -90,13 +90,12 @@ export default StyleSheet.create({
   },
 
   actionButtonContainer: {
+    flex: 1,
     justifyContent: "space-between",
     alignItems: "center",
     alignSelf: "center",
-    flex: 1,
     flexDirection: "row",
     width: uiWidth,
-    height: 43 / 812 * HEIGHT,
     marginTop: HEIGHT * 0.06
   }
 });
