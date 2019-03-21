@@ -32,8 +32,8 @@ export default StyleSheet.create({
 		position: "absolute",
 	},
 	icon: {
-		height: 40,
-		width: 40,
+		height: WIDTH / 4 - 70,
+		width: WIDTH / 4 - 70,
 		resizeMode: "contain",
 	},
 	centerContent: {
