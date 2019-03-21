@@ -44,17 +44,13 @@ export default class Editor extends React.Component {
 
 	render() {
 		return (
-			<View styles={styles.container}>
+			<View style={styles.container}>
 				<Board
 					style={styles.board}
 					fen={this.state.fen}
 					flip={this.state.flipBoard}
 				/>
-				<FenDisplay fen={this.state.fen} />
-				<PieceSelector
-					piecePickerColor={this.state.piecePickerColor}
-					setPickerColor={this.setPickerColor}
-				/>
+				<View style={styles.actions}>
 				<View style={styles.actionButtonContainer}>
 					<Button
 						source={require("../../assets/icons/reverse.png")}
@@ -64,8 +60,13 @@ export default class Editor extends React.Component {
 					<Button source={require("../../assets/icons/save.png")} />
 					<Button source={require("../../assets/icons/upload.png")} />
 				</View>
-				
-        
+				<PieceSelector
+					piecePickerColor={this.state.piecePickerColor}
+					setPickerColor={this.setPickerColor}
+				/>
+
+					<FenDisplay fen={this.state.fen} />
+				</View>
 			</View>
 		);
 	}
