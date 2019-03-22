@@ -3,10 +3,12 @@ import {
 	Clipboard,
 	TouchableOpacity,
 	TouchableWithoutFeedback,
+	Dimensions,
 	View,
 	Text,
 	Image,
 } from "react-native";
+import Switch from "react-native-switch-pro";
 
 import Button from "../ui/Button";
 import Board from "../board/Board";
@@ -14,6 +16,8 @@ import Board from "../board/Board";
 import styles from "../../styles/pages/editor";
 import { PIECES as PIECES_IMAGES } from "../board/Piece";
 
+const WIDTH = Dimensions.get("window").width,
+	HEIGHT = Dimensions.get("window").height;
 const FEN_DEFAULT = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
 export default class Editor extends React.Component {
@@ -24,6 +28,7 @@ export default class Editor extends React.Component {
 			fen: FEN_DEFAULT,
 			flipBoard: false,
 			piecePickerColor: "white",
+			switchVal: "white",
 		};
 
 		this.setPickerColor = this.setPickerColor.bind(this);
@@ -33,6 +38,7 @@ export default class Editor extends React.Component {
 	setPickerColor(color) {
 		this.setState({
 			piecePickerColor: color,
+			switchVal: color,
 		});
 	}
 
@@ -51,19 +57,26 @@ export default class Editor extends React.Component {
 					flip={this.state.flipBoard}
 				/>
 				<View style={styles.actions}>
-				<View style={styles.actionButtonContainer}>
-					<Button
-						source={require("../../assets/icons/reverse.png")}
-						onPress={this.flipBoard}
+					<View style={styles.actionButtonContainer}>
+						<Button
+							source={require("../../assets/icons/reverse.png")}
+							onPress={this.flipBoard}
+						/>
+						<Button
+							source={require("../../assets/icons/reset.png")}
+						/>
+						<Button
+							source={require("../../assets/icons/save.png")}
+						/>
+						<Button
+							source={require("../../assets/icons/upload.png")}
+						/>
+					</View>
+					<PieceSelector
+						piecePickerColor={this.state.piecePickerColor}
+						setPickerColor={this.setPickerColor}
+						switchVal={this.state.switchVal}
 					/>
-					<Button source={require("../../assets/icons/reset.png")} />
-					<Button source={require("../../assets/icons/save.png")} />
-					<Button source={require("../../assets/icons/upload.png")} />
-				</View>
-				<PieceSelector
-					piecePickerColor={this.state.piecePickerColor}
-					setPickerColor={this.setPickerColor}
-				/>
 
 					<FenDisplay fen={this.state.fen} />
 				</View>
@@ -96,19 +109,35 @@ const PieceSelector = (props) => {
 	return (
 		<View style={styles.pieceSelector}>
 			<View style={styles.colorSelector}>
-				<View style={styles.colorSelectorGraphic}>
-					<TouchableWithoutFeedback
+				{/* <View style={styles.colorSelectorGraphic}>
+					<TouchableOpacity
 						onPress={() => props.setPickerColor("white")}
 					>
 						<View style={styles.colorSelectorWhite} />
-					</TouchableWithoutFeedback>
+					</TouchableOpacity>
 					<TouchableWithoutFeedback
 						onPress={() => props.setPickerColor("black")}
 					>
 						<View style={styles.colorSelectorBlack} />
 					</TouchableWithoutFeedback>
-				</View>
+				</View>  */}
+				<Switch
+					height={HEIGHT / 28}
+					width={HEIGHT / 14}
+					circleColorActive="black"
+					backgroundActive="gray"
+					circleColorInactive="white"
+					backgroundInactive="#c6c6c6"
+					onSyncPress={() => {
+						if (props.switchVal == "white") {
+							props.setPickerColor("black");
+						} else {
+							props.setPickerColor("white");
+						}
+					}}
+				/>
 			</View>
+			
 			<View style={styles.piecePicker}>
 				{["pawn", "bishop", "knight", "rook", "queen", "king"].map(
 					(p) => (
