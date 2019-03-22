@@ -2,60 +2,68 @@ import React from "react";
 import { StyleSheet, Image } from "react-native";
 
 export const PIECES = {
-  bishop: require("../../assets/pieces/bishop.png"),
-  king: require("../../assets/pieces/king.png"),
-  knight: require("../../assets/pieces/knight.png"),
-  pawn: require("../../assets/pieces/pawn.png"),
-  queen: require("../../assets/pieces/queen.png"),
-  rook: require("../../assets/pieces/rook.png")
+	bishop: require("../../assets/pieces/bishop.png"),
+	king: require("../../assets/pieces/king.png"),
+	knight: require("../../assets/pieces/knight.png"),
+	pawn: require("../../assets/pieces/pawn.png"),
+	queen: require("../../assets/pieces/queen.png"),
+	rook: require("../../assets/pieces/rook.png"),
 };
 
 export default class Piece extends React.Component {
-  isBlack() {
-    return this.props.number > 10;
-  }
+	isBlack() {
+		return this.props.number > 10;
+	}
+	getPieceImage(num) {
+		// Subtract 10 if the number is black
+		const n = this.isBlack() ? num - 10 : num;
 
-  getPieceImage(num) {
-    // Subtract 10 if the number is black
-    const n = this.isBlack() ? num - 10 : num;
+		const { bishop, king, knight, pawn, queen, rook } = PIECES;
 
-    const { bishop, king, knight, pawn, queen, rook } = PIECES;
+		switch (n) {
+			case 0:
+				return;
+			case 1:
+				return rook;
+			case 2:
+				return knight;
+			case 3:
+				return bishop;
+			case 4:
+				return queen;
+			case 5:
+				return king;
+			case 6:
+				return pawn;
+			default:
+				throw `ERROR: Unrecognizable Piece (${n})`;
+		}
+	}
 
-    switch (n) {
-      case 0:
-        return;
-      case 1:
-        return rook;
-      case 2:
-        return knight;
-      case 3:
-        return bishop;
-      case 4:
-        return queen;
-      case 5:
-        return king;
-      case 6:
-        return pawn;
-      default:
-        throw `ERROR: Unrecognizable Piece (${n})`;
-    }
-  }
-
-  render() {
-    return (
-      <Image
-        source={this.getPieceImage(this.props.number)}
-        style={{ ...styles.pieces, tintColor: this.isBlack() ? null : "white" }}
-      />
-    );
-  }
+	render() {
+		return (
+			<Image
+				source={this.getPieceImage(this.props.number)}
+				style={{
+					...styles.pieces,
+					height:
+						this.props.number === 6 || this.props.number === 16
+							? "70%"
+							: "85%",
+					tintColor: this.isBlack() ? null : "white",
+					bottom:
+						this.props.number === 6 || this.props.number === 16
+							? "-10%"
+							: "-3%",
+				}}
+			/>
+		);
+	}
 }
 
 const styles = StyleSheet.create({
-  pieces: {
-		height: "85%",
+	pieces: {
 		resizeMode: "contain",
-    alignSelf: "center",
-    position: "absolute"
-  }
+		alignSelf: "center",
+	},
 });
