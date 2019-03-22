@@ -35,11 +35,13 @@ export default (props) => {
 		</View>
 	);
 };
-
+const WIDTH = Dimensions.get("window").width;
+const HEIGHT = Dimensions.get("window").height;
+const WxH = WIDTH * HEIGHT;
 const styles = StyleSheet.create({
 	board: {
-		width: Dimensions.get("window").width * 0.95,
-		height: Dimensions.get("window").width * 0.95,
+		width: WIDTH / 1.1,
+		height: WIDTH / 1.1
 	},
 	row: {
 		flex: 1,
