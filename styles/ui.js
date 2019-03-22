@@ -23,8 +23,8 @@ export default StyleSheet.create({
 		alignItems: "center",
 		borderRadius: 10,
 		// "WIDTH / 4 - 50" causes the button's height and width to be proportionate to the device's screen
-		height: WIDTH / 4 - 50,
-		width: WIDTH / 4 - 50,
+		height: HEIGHT / 15,
+		width: HEIGHT / 15,
 	},
 	buttonText: {
 		color: "white",
@@ -32,8 +32,8 @@ export default StyleSheet.create({
 		position: "absolute",
 	},
 	icon: {
-		height: WIDTH / 4 - 70,
-		width: WIDTH / 4 - 70,
+		height: HEIGHT / 25,
+		width: HEIGHT / 25,
 		resizeMode: "contain",
 	},
 	centerContent: {
