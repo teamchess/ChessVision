@@ -15,7 +15,7 @@ export default StyleSheet.create({
 	},
 	actions: {
 		height: HEIGHT / 3,
-		position: "absolute",
+		alignItems: "stretch",
 		flexDirection: "column",
 		justifyContent: "space-evenly",
 	},
@@ -102,6 +102,7 @@ export default StyleSheet.create({
 		alignSelf: "center",
 		flexDirection: "row",
 		width: uiWidth,
+
 		// marginTop: HEIGHT * 0.05,
 	},
 });
