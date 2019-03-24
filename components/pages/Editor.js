@@ -25,7 +25,7 @@ export default class Editor extends React.Component {
 		super(props);
 
 		this.state = {
-			fen: "rnbqkbnr/pRRRRppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+			fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
 			flipBoard: false,
 			piecePickerColor: "white",
 			switchVal: "white",
