@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Image } from "react-native";
+import { StyleSheet, Image, TouchableHighlight } from "react-native";
 
 export const PIECES = {
 	bishop: require("../../assets/pieces/bishop.png"),
@@ -42,21 +42,29 @@ export default class Piece extends React.Component {
 
 	render() {
 		return (
-			<Image
-				source={this.getPieceImage(this.props.number)}
-				style={{
-					...styles.pieces,
-					height:
-						this.props.number === 6 || this.props.number === 16
-							? "70%"
-							: "85%",
-					tintColor: this.isBlack() ? null : "white",
-					bottom:
-						this.props.number === 6 || this.props.number === 16
-							? "-10%"
-							: "-3%",
+			<TouchableHighlight
+				style={{ height: "100%", width: "100%" }}
+				onPress={() => {
+					console.log("A chess piece has been pressed");
 				}}
-			/>
+			>
+				<Image
+					on
+					source={this.getPieceImage(this.props.number)}
+					style={{
+						...styles.pieces,
+						height:
+							this.props.number === 6 || this.props.number === 16
+								? "70%"
+								: "85%",
+						tintColor: this.isBlack() ? null : "white",
+						bottom:
+							this.props.number === 6 || this.props.number === 16
+								? "-18%"
+								: "-5%",
+					}}
+				/>
+			</TouchableHighlight>
 		);
 	}
 }
