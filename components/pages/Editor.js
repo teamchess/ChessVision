@@ -2,7 +2,7 @@ import React from "react";
 import {
 	Clipboard,
 	TouchableOpacity,
-	TouchableWithoutFeedback,
+	Alert,
 	Dimensions,
 	View,
 	Text,
@@ -25,7 +25,7 @@ export default class Editor extends React.Component {
 		super(props);
 
 		this.state = {
-			fen: FEN_DEFAULT,
+			fen: "rnbqkbnr/pRRRRppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
 			flipBoard: false,
 			piecePickerColor: "white",
 			switchVal: "white",
@@ -33,6 +33,7 @@ export default class Editor extends React.Component {
 
 		this.setPickerColor = this.setPickerColor.bind(this);
 		this.flipBoard = this.flipBoard.bind(this);
+		this.resetBoardRequest = this.resetBoardRequest.bind(this);
 	}
 
 	setPickerColor(color) {
@@ -47,7 +48,22 @@ export default class Editor extends React.Component {
 			flipBoard: !prevState.flipBoard,
 		}));
 	}
-
+	resetBoardRequest() {
+		Alert.alert(
+			"Reset board",
+			"Are you sure you want to reset the board?",
+			[
+				{
+					text: "Cancel",
+				},
+				{ text: "OK", onPress: () => { this.setState({ fen: FEN_DEFAULT })}},
+			],
+			{ cancelable: false }
+		);
+	}
+	resetBoard() {
+		this.setState({ fen: FEN_DEFAULT });
+	}
 	render() {
 		return (
 			<View style={styles.container}>
@@ -63,6 +79,7 @@ export default class Editor extends React.Component {
 							onPress={this.flipBoard}
 						/>
 						<Button
+							onPress={this.resetBoardRequest}
 							source={require("../../assets/icons/reset.png")}
 						/>
 						<Button
@@ -137,7 +154,7 @@ const PieceSelector = (props) => {
 					}}
 				/>
 			</View>
-			
+
 			<View style={styles.piecePicker}>
 				{["pawn", "bishop", "knight", "rook", "queen", "king"].map(
 					(p) => (
@@ -160,8 +177,4 @@ const PieceSelectorPiece = (props) => {
 			source={props.source}
 		/>
 	);
-};
-
-const ActionButton = (props) => {
-	return <Button style={styles.actionButton} {...props} />;
 };
