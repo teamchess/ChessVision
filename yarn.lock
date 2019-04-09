@@ -4335,6 +4335,13 @@ react-native-svg@8.0.8:
     lodash "^4.16.6"
     pegjs "^0.10.0"
 
+react-native-switch-pro@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-switch-pro/-/react-native-switch-pro-1.0.2.tgz#005c91a6c25e03df5a77124fdecbe226fb9d0a3d"
+  integrity sha512-q1hxI1bLhL24Tv9hiaSuKQhStLWzRUpx4YBDTb6Lu0jUWKdJD+e2AHFzP/drAycdxGyLoZQXIBsaqQOYonIq+Q==
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-vector-icons@6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-6.0.0.tgz#3a7076dbe244ea94c6d5e92802a870e64a4283c5"
