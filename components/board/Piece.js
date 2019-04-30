@@ -47,29 +47,13 @@ export default class Piece extends React.Component {
         source={this.getPieceImage(this.props.number)}
         style={{
           ...styles.pieces,
+          top: this.props.y || null,
+          left: this.props.x || null,
           height: this.props.number === 6 || this.props.number === 16 ? "70%" : "85%",
           tintColor: this.isBlack() ? null : "white",
-          bottom: this.props.number === 6 || this.props.number === 16 ? "-18%" : "-5%"
+          bottom: this.props.x ? null : this.props.number === 6 || this.props.number === 16 ? "-18%" : "-5%"
         }}
       />
-    ) : null;
-  }
-}
-
-export class DraggablePiece extends Piece {
-  render() {
-    return this.props.isVisible ? (
-      <View style={{left: this.props.x, top: this.props.y}}>
-        <Image
-          source={this.getPieceImage(this.props.number)}
-          style={{
-            ...styles.pieces,
-            height: this.props.number === 6 || this.props.number === 16 ? "70%" : "85%",
-            tintColor: this.isBlack() ? null : "white",
-            bottom: this.props.number === 6 || this.props.number === 16 ? "-18%" : "-5%"
-          }}
-        />
-      </View>
     ) : null;
   }
 }
