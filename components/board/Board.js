@@ -5,30 +5,6 @@ import { DraggablePiece } from "./Piece";
 import { parseFEN } from "../../Utils";
 
 export default class extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      selectedPiece: {
-        x: null,
-        y: null
-      }
-    };
-
-		this.panResponder;
-    this.setSelected = this.setSelected.bind(this);
-  }
-
-  setSelected({ x, y }, number) {
-    this.setState({
-      selectedPiece: {
-        x: x,
-				y: y,
-				number: number
-      }
-    });
-  }
-
   render() {
     const { flip, fen } = this.props;
     const board = parseFEN(fen);
@@ -54,13 +30,10 @@ export default class extends React.Component {
                 piece={piece}
                 coords={{ y: yIndex, x: xIndex }}
                 key={`${(yIndex, xIndex)}`}
-                setSelected={this.setSelected}
-                selectedCoords={this.state.selectedPiece}
               />
             ))}
           </View>
 				))}
-				<View style={{ display: this.state.selectedPiece.x ? "flex" : "none",  }}/>
       </View>
     );
   }

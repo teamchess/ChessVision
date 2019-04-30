@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Image, TouchableHighlight } from "react-native";
+import { StyleSheet, Image, TouchableHighlight, PanResponder } from "react-native";
 
 export const PIECES = {
   bishop: require("../../assets/pieces/bishop.png"),
@@ -11,6 +11,34 @@ export const PIECES = {
 };
 
 export default class Piece extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      locationX: 0,
+      locationY: 0,
+      selected: false
+    };
+
+    this.panResponder;
+  }
+
+  componentWillMount() {
+    this.panResponder = PanResponder.create({
+      onStartShouldSetPanResponder: (event, gestureState) => true,
+      onStartShouldSetPanResponderCapture: (event, gestureState) => false,
+
+      onPanResponderMove: (event, gestureState) => {
+        this.setState({
+          //After the change in the location
+          //state will be upated to re-render the screen and show the location in view
+          locationX: event.nativeEvent.locationX.toFixed(2),
+          locationY: event.nativeEvent.locationY.toFixed(2)
+        }, () => console.log("X: ", this.state.locationX, " Y:", this.state.locationY));
+      }
+    });
+  }
+
   isBlack() {
     return this.props.number > 10;
   }
@@ -42,19 +70,25 @@ export default class Piece extends React.Component {
   }
 
   render() {
-    return this.props.isVisible ? (
+    return (
       <Image
         source={this.getPieceImage(this.props.number)}
         style={{
           ...styles.pieces,
-          top: this.props.y || null,
-          left: this.props.x || null,
+          flex: 1,
+          top: parseFloat(this.state.locationY) || null,
+          left: parseFloat(this.state.locationX) || null,
           height: this.props.number === 6 || this.props.number === 16 ? "70%" : "85%",
           tintColor: this.isBlack() ? null : "white",
-          bottom: this.props.x ? null : this.props.number === 6 || this.props.number === 16 ? "-18%" : "-5%"
+          bottom: parseFloat(this.state.locationX)
+            ? null
+            : this.props.number === 6 || this.props.number === 16
+            ? "-18%"
+            : "-5%"
         }}
+        {...this.panResponder.panHandlers}
       />
-    ) : null;
+    );
   }
 }
 
