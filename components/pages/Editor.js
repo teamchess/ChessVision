@@ -9,7 +9,6 @@ import {
 	Image,
 } from "react-native";
 import Switch from "react-native-switch-pro";
-
 import Button from "../ui/Button";
 import Board from "../board/Board";
 
