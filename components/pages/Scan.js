@@ -20,7 +20,6 @@ export default class Scan extends React.Component {
       photo: null,
     };
   }
-
   async componentDidMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === "granted" }); //If status is true, the camera permissions will be enabled
@@ -40,7 +39,7 @@ export default class Scan extends React.Component {
       return <View />;
     } else if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>;
-    } else {
+    } 
       return (
         <View>
           <Camera style={styles.preview} ref={camera => (this.camera = camera)}>
@@ -62,7 +61,6 @@ export default class Scan extends React.Component {
       );
     }
   }
-}
 
 const styles = StyleSheet.create({
   preview: {
