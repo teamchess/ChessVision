@@ -45,7 +45,7 @@ export default class Scan extends React.Component {
   };
 
   openGallery = async () => {
-    const photo = ImagePicker.launchImageLibraryAsync({
+    let photo = ImagePicker.launchImageLibraryAsync({
       mediaTypes: "Images",
       base64: true
     });
@@ -81,6 +81,9 @@ export default class Scan extends React.Component {
                 {"  "}Back
               </Ionicons>
             </TouchableOpacity>
+            <TouchableOpacity onPress={this.openGallery} style={styles.gallery}>
+                <SimpleLineIcons name="picture" size={40} color="white"/>
+            </TouchableOpacity>
           </View>
           <View style={styles.cameraToolbar}>
             <TouchableOpacity
@@ -93,9 +96,6 @@ export default class Scan extends React.Component {
                 size={this.state.captureHidden ? 0 : 85}
                 color="white"
               />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.openGallery}>
-                <SimpleLineIcons name="picture" size={40} color="white"/>
             </TouchableOpacity>
           </View>
         </Camera>
@@ -122,6 +122,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "transparent",
     flexDirection: "row",
+    width: "100%",
     marginTop: winHeight - 200
   },
   topToolbar: {
@@ -134,8 +135,11 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   gallery: {
-    lineHeight: 85,
-    marginLeft: winWidth / 6.5,
-    position: "absolute"
+    flexDirection: "row",
+    right: 35,
+    alignSelf: "flex-end",
+    height: 40,
+    width: 40,
+    position: "absolute",
   }
 });
