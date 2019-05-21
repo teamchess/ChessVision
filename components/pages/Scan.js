@@ -24,11 +24,11 @@ export default class Scan extends React.Component {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === "granted" }); //If status is true, the camera permissions will be enabled
   }
-  async captureImage() {
-    this.camera.takePictureAsync({onPictureSaved: this.onPictureSaved});
-    console.log("Image captured!");
+  captureImage = async () => {
+  const photoData = await this.camera.takePictureAsync({base64: true, quality: 1});
+  this.setState({photo: photoData});
+  console.log("Image captured: Photo Data:" + this.state.photoData);
 
-    
   }
  onPictureSaved = async (photo) => {
   console.log("Picture saved!");
