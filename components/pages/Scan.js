@@ -5,10 +5,10 @@ import {
   View,
   Text,
   TouchableOpacity,
-  TouchableWithoutFeedback
+  ActivityIndicator
 } from "react-native";
-import { Camera, Permissions } from "expo";
-import { Ionicons } from "@expo/vector-icons";
+import { Camera, Permissions, FileSystem, ImagePicker } from "expo";
+import { Ionicons, SimpleLineIcons } from "@expo/vector-icons";
 
 const { width: winWidth, height: winHeight } = Dimensions.get("window");
 
@@ -18,49 +18,91 @@ export default class Scan extends React.Component {
     this.state = {
       hasCameraPermission: null,
       photo: null,
+      captureHidden: false
     };
   }
-  async componentDidMount() {
+
+  async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === "granted" }); //If status is true, the camera permissions will be enabled
   }
-  captureImage = async () => {
-  const photoData = await this.camera.takePictureAsync({base64: true, quality: 1});
-  this.setState({photo: photoData});
-  console.log("Image captured: Photo Data:" + this.state.photoData);
 
-  }
- onPictureSaved = async (photo) => {
-  console.log("Picture saved!");
- }
+  captureImage = () => {
+    this.setState({ captureHidden: true });
+    this.camera.takePictureAsync({
+      base64: true,
+      onPictureSaved: this.onPictureSaved
+    });
+    console.log("Image captured!");
+  };
+
+  onPictureSaved = async photo => {
+    await FileSystem.moveAsync({
+      from: photo.uri,
+      to: `${FileSystem.documentDirectory}photos/${Date.now()}.jpg`
+    });
+    console.log(photo);
+  };
+
+  openGallery = async () => {
+    const photo = ImagePicker.launchImageLibraryAsync({
+      mediaTypes: "Images",
+      base64: true
+    });
+    await FileSystem.moveAsync({
+      from: photo.uri,
+      to: `${FileSystem.documentDirectory}photos/${Date.now()}.jpg`
+    });
+  };
+
   render() {
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
     } else if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>;
-    } 
-      return (
-        <View>
-          <Camera style={styles.preview} ref={camera => (this.camera = camera)}>
-            <View style={styles.topToolbar}>
-              <TouchableOpacity>
-                <Ionicons name="ios-arrow-round-back" size={25} color="white">{"  "}Back</Ionicons>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.cameraToolbar}>
-              <TouchableOpacity
-                style={styles.capture}
-                onPress={this.captureImage}
-              >
-                <Ionicons name="ios-radio-button-off" size={85} color="white" />
-              </TouchableOpacity>
-            </View>
-          </Camera>
-        </View>
-      );
     }
+    return (
+      <View>
+        {this.state.captureHidden ? (
+          <ActivityIndicator
+            style={styles.spinner}
+            size="large"
+            color="white"
+          />
+        ) : (
+          <></>
+        )}
+
+        <Camera style={styles.preview} ref={camera => (this.camera = camera)}>
+          <View style={styles.topToolbar}>
+            <TouchableOpacity>
+              <Ionicons name="ios-arrow-round-back" size={25} color="white">
+                {"  "}Back
+              </Ionicons>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.cameraToolbar}>
+            <TouchableOpacity
+              style={styles.capture}
+              onPress={this.captureImage}
+              hide={true}
+            >
+              <Ionicons
+                name="ios-radio-button-off"
+                size={this.state.captureHidden ? 0 : 85}
+                color="white"
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.openGallery}>
+                <SimpleLineIcons name="picture" size={40} color="white"/>
+            </TouchableOpacity>
+          </View>
+        </Camera>
+      </View>
+    );
   }
+}
 
 const styles = StyleSheet.create({
   preview: {
@@ -85,6 +127,15 @@ const styles = StyleSheet.create({
   topToolbar: {
     marginTop: 50,
     marginLeft: 30,
-    borderRadius: 30,
+    borderRadius: 30
+  },
+  spinner: {
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  gallery: {
+    lineHeight: 85,
+    marginLeft: winWidth / 6.5,
+    position: "absolute"
   }
 });
