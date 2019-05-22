@@ -1,7 +1,8 @@
 import React from "react";
-import { Clipboard, TouchableOpacity, Alert, Dimensions, View, Text, Image, Linking } from "react-native";
-import Switch from "react-native-switch-pro";
 
+import { Clipboard, TouchableOpacity, Alert, Dimensions, View, Text, Image, Linking } from "react-native";
+
+import Switch from "react-native-switch-pro";
 import Button from "../ui/Button";
 import Board from "../board/Board";
 
@@ -9,12 +10,12 @@ import styles from "../../styles/pages/editor";
 import { PIECES as PIECES_IMAGES } from "../board/Piece";
 
 const WIDTH = Dimensions.get("window").width,
-	HEIGHT = Dimensions.get("window").height;
+  HEIGHT = Dimensions.get("window").height;
 const FEN_DEFAULT = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
 export default class Editor extends React.Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
 
 		this.state = {
 			fen: FEN_DEFAULT,
@@ -23,17 +24,17 @@ export default class Editor extends React.Component {
 			switchVal: "white",
 		};
 
-		this.setPickerColor = this.setPickerColor.bind(this);
-		this.flipBoard = this.flipBoard.bind(this);
-		this.resetBoardRequest = this.resetBoardRequest.bind(this);
-	}
+    this.setPickerColor = this.setPickerColor.bind(this);
+    this.flipBoard = this.flipBoard.bind(this);
+    this.resetBoardRequest = this.resetBoardRequest.bind(this);
+  }
 
-	setPickerColor(color) {
-		this.setState({
-			piecePickerColor: color,
-			switchVal: color,
-		});
-	}
+  setPickerColor(color) {
+    this.setState({
+      piecePickerColor: color,
+      switchVal: color
+    });
+  }
 
 	flipBoard() {
 		this.setState((prevState) => ({
@@ -81,11 +82,11 @@ export default class Editor extends React.Component {
 					</View>
 					<PieceSelector piecePickerColor={this.state.piecePickerColor} setPickerColor={this.setPickerColor} switchVal={this.state.switchVal} />
 
-					<FenDisplay fen={this.state.fen} />
-				</View>
-			</View>
-		);
-	}
+          <FenDisplay fen={this.state.fen} />
+        </View>
+      </View>
+    );
+  }
 }
 
 const FenDisplay = (props) => {
