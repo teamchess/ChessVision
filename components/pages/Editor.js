@@ -17,8 +17,8 @@ export default class Editor extends React.Component {
   constructor(props) {
     super(props);
 
-		this.state = {
-			fen: FEN_DEFAULT,
+    this.state = {
+			fen: props.location.state ? props.location.state.fen : FEN_DEFAULT,
 			flipBoard: false,
 			piecePickerColor: "white",
 			switchVal: "white",
