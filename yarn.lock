@@ -9965,10 +9965,10 @@ react-native-svg@8.0.10:
     lodash "^4.16.6"
     pegjs "^0.10.0"
 
-react-native-switch-pro@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/react-native-switch-pro/-/react-native-switch-pro-1.0.3.tgz#2e564c4e569400358b023ee72c02645992401725"
-  integrity sha512-piKvJfecERCrna3wXD9M//b6+KxdeyJ4rI3xR2GSBgUVkSqZpAmeqlcEIk8CDheDS8D7e6njQ0Xmqxz9stFrzQ==
+react-native-switch-pro@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-switch-pro/-/react-native-switch-pro-1.0.4.tgz#9007628e4b8721b44fa0d6ecd07013f6afd0031a"
+  integrity sha512-HCuvKVrCbN/wO6rFfwCS9ds4CbqldUMdtINosbVVrR72Zf9YiG/rLrsDC/8ezJSc1Q2P03vCF89odaS81bJyow==
   dependencies:
     prop-types "^15.5.10"
 
