@@ -37,32 +37,16 @@ export default class Scan extends React.Component {
   };
 
   onPictureSaved = async photo => {
-    fetch("http://172.20.10.2:3000", {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, cors, *same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-          'Content-Type': 'application/json',
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: 'follow', // manual, *follow, error
-      referrer: 'no-referrer', // no-referrer, *client
-      body: JSON.stringify({image: photo.base64}), // body data type must match "Content-Type" heade
-    }).then(x => console.log(x))
-    .catch(x => console.log(x))
-
+    sendImageToServer(photo.base64).then(x => console.log(x)).catch(x => console.log(x))
   };
 
   openGallery = async () => {
-    let photo = ImagePicker.launchImageLibraryAsync({
+    let photo = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: "Images",
       base64: true
     });
-    await FileSystem.moveAsync({
-      from: photo.uri,
-      to: `${FileSystem.documentDirectory}photos/${Date.now()}.jpg`
-    });
+    
+    sendImageToServer(photo.base64).then(x => console.log(x)).catch(x => console.log(x))
   };
 
   render() {
@@ -103,7 +87,7 @@ export default class Scan extends React.Component {
             >
               <Ionicons
                 name="ios-radio-button-off"
-                size={this.state.captureHidden ? 0 : 85}
+                size={85}
                 color="white"
               />
             </TouchableOpacity>
@@ -153,3 +137,20 @@ const styles = StyleSheet.create({
     position: "absolute",
   }
 });
+
+function sendImageToServer(base64) {
+  return fetch("http://172.20.10.2:3000", {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, cors, *same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrer: 'no-referrer', // no-referrer, *client
+    body: JSON.stringify({image: base64}), // body data type must match "Content-Type" heade
+  })
+  .catch(x => console.log(x))
+}
