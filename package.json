@@ -21,7 +21,7 @@
 		"start": "^5.1.0"
 	},
 	"devDependencies": {
-		"babel-preset-expo": "^5.0.0"
+		"babel-preset-expo": "^7.1.0"
 	},
 	"private": true
 }
