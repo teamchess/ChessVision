@@ -1002,10 +1002,10 @@
   resolved "https://registry.yarnpkg.com/@expo/traveling-fastlane-linux/-/traveling-fastlane-linux-1.9.4.tgz#2867093af2ae1eaf49c77a73681e42968bdee53f"
   integrity sha512-4DbD+OmXJSpYoV/DRP92y7/IzKP9bsExc1kF82PVcZIZqN66ZwExWmOyPoYeociY71GwptkVEQ0Dur+II5/g8A==
 
-"@expo/vector-icons@^10.0.1":
-  version "10.0.1"
-  resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-10.0.1.tgz#dbb0a9ab68b53aa6cbbc04b48421e4db862535d9"
-  integrity sha512-24m39O2aO2G67VlQOlUHxGr/qYhfuYNJewpSSSUSxZ+3nznfp5fzN0aHPaFXuxCCyJiF49QkbBiXKHAGZWhVJA==
+"@expo/vector-icons@^10.0.6":
+  version "10.0.6"
+  resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-10.0.6.tgz#5718953ff0b97827d11dae5787976fa8ce5caaed"
+  integrity sha512-qNlKPNdf073LpeEpyClxAh0D3mmIK4TGAQzeKR0HVwf14RIEe17+mLW5Z6Ka5Ho/lUtKMRPDHumSllFyKvpeGg==
   dependencies:
     lodash "^4.17.4"
 
@@ -9935,8 +9935,9 @@ react-native-gesture-handler@~1.0.14:
     invariant "^2.2.2"
     prop-types "^15.5.10"
 
-"react-native-maps@github:expo/react-native-maps#v0.22.1-exp.0":
+react-native-maps@expo/react-native-maps#v0.22.1-exp.0:
   version "0.22.1"
+  uid e6f98ff7272e5d0a7fe974a41f28593af2d77bb2
   resolved "https://codeload.github.com/expo/react-native-maps/tar.gz/e6f98ff7272e5d0a7fe974a41f28593af2d77bb2"
 
 react-native-reanimated@1.0.0-alpha.11:
@@ -9965,7 +9966,7 @@ react-native-svg@8.0.10:
     lodash "^4.16.6"
     pegjs "^0.10.0"
 
-react-native-switch-pro@^1.0.4:
+react-native-switch-pro@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/react-native-switch-pro/-/react-native-switch-pro-1.0.4.tgz#9007628e4b8721b44fa0d6ecd07013f6afd0031a"
   integrity sha512-HCuvKVrCbN/wO6rFfwCS9ds4CbqldUMdtINosbVVrR72Zf9YiG/rLrsDC/8ezJSc1Q2P03vCF89odaS81bJyow==
