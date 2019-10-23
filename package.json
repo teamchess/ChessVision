@@ -14,7 +14,7 @@
 		"pro": "^0.3.0",
 		"react": "16.5.0",
 		"react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
-		"react-native-easy-grid": "^0.2.1",
+		"react-native-easy-grid": "^0.2.2",
 		"react-native-switch": "^1.5.0",
 		"react-native-switch-pro": "^1.0.3",
 		"react-router-native": "^5.1.2",
